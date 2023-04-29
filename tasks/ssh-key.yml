@@ -1,0 +1,23 @@
+- name: Ensure .ssh directory exists
+  file:
+    dest: "{{ lookup('env', 'HOME') }}/.ssh"
+    mode: 0700
+    state: directory
+  tags:
+    - ssh
+- name: Install private SSH Key
+  copy:
+    src: ".ssh/id-rsa"
+    dest: "{{ lookup('env', 'HOME') }}/.ssh/id-rsa"
+    mode: 0600
+  tags:
+    - ssh
+- name: Install public SSH Key
+  copy:
+    src: ".ssh/id-rsa.pub"
+    dest: "{{ lookup('env', 'HOME') }}/.ssh/id-rsa.pub"
+    mode: 0600
+  tags:
+    - ssh
+
+
